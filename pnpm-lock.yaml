@@ -33,7 +33,7 @@ importers:
       '@capacitor/app':
         specifier: ^6.0.0
         version: 6.0.2(@capacitor/core@6.0.0)
-      '@capacitor/background-runner':
+      '@tritonehealth/capacitor-background-runner':
         specifier: workspace:^
         version: link:../../packages/capacitor-plugin
       '@capacitor/core':

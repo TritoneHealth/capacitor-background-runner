@@ -7,7 +7,7 @@
     "@babel/plugin-transform-react-jsx": "^7.22.5",
     "@capacitor/android": "^6.0.0",
     "@capacitor/app": "^6.0.0",
-    "@capacitor/background-runner": "workspace:^",
+    "@tritonehealth/capacitor-background-runner": "workspace:^",
     "@capacitor/core": "^6.0.0",
     "@capacitor/haptics": "^6.0.0",
     "@capacitor/ios": "^6.0.0",
