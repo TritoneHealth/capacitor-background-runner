@@ -1,6 +1,6 @@
 {
   "name": "ios-engine",
-  "private": true,
+  "private": false,
   "scripts": {
     "lint": " pnpm swiftlint lint",
     "fmt": " pnpm swiftlint lint --fix --format",

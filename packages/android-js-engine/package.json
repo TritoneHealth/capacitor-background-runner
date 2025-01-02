@@ -1,6 +1,6 @@
 {
   "name": "android-js-engine",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@naturalcycles/ktlint": "1.9.0",
     "clang-format": "^1.8.0",
