@@ -114,17 +114,6 @@ addEventListener("testCapNotification", async (resolve, reject, args) => {
   }
 });
 
-addEventListener("testCapacitorGeolocation", async (resolve, reject, args) => {
-  try {
-    const location = await CapacitorGeolocation.getCurrentPosition();
-    console.log("current location: " + JSON.stringify(location));
-    resolve(location);
-  } catch (err) {
-    console.error(err);
-    reject(err);
-  }
-});
-
 addEventListener(
   "testCapacitorDeviceBatteryStatus",
   (resolve, reject, args) => {

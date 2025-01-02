@@ -28,7 +28,7 @@ const Tab1: React.FC = () => {
     setCommandOutput("");
     try {
       const permissions = await BackgroundRunner.requestPermissions({
-        apis: ["geolocation", "notifications"],
+        apis: ["notifications"],
       });
       setCommandOutput(`permissions: ${JSON.stringify(permissions)}`);
     } catch (err) {
@@ -89,20 +89,6 @@ const Tab1: React.FC = () => {
         details: {},
       });
       setCommandOutput(`success: notification scheduled`);
-    } catch (err) {
-      setCommandOutput(`ERROR: ${err}`);
-    }
-  };
-
-  const onTestCapLocation = async () => {
-    setCommandOutput("");
-    try {
-      const response = await BackgroundRunner.dispatchEvent({
-        label: "com.example.background.task",
-        event: "testCapacitorGeolocation",
-        details: {},
-      });
-      setCommandOutput(`success: ${JSON.stringify(response)}`);
     } catch (err) {
       setCommandOutput(`ERROR: ${err}`);
     }
@@ -243,9 +229,6 @@ const Tab1: React.FC = () => {
         </IonButton>
         <IonButton expand="block" onClick={onTestCapAppClearBadge}>
           Test Capacitor Notif. - Clear Badge
-        </IonButton>
-        <IonButton expand="block" onClick={onTestCapLocation}>
-          Test Capacitor Geolocation
         </IonButton>
         <IonButton expand="block" onClick={onTestCapDeviceBattery}>
           Test Capacitor Device - Battery
