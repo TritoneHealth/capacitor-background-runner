@@ -1,11 +1,11 @@
-# @tritonehealth/capacitor-background-runner
+# @tritone/capacitor-background-runner
 
 Background Runner provides an event-based standalone JavaScript environment for executing your Javascript code outside of the web view.
 
 ## Install
 
 ```bash
-npm install @tritonehealth/capacitor-background-runner
+npm install @tritone/capacitor-background-runner
 npx cap sync
 ```
 
@@ -67,7 +67,7 @@ Insert the following line to `android/app/build.gradle`:
 repositories {
     flatDir{
         dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
-+		dirs '../../node_modules/@tritonehealth/capacitor-background-runner/android/src/main/libs', 'libs'
++		dirs '../../node_modules/@tritone/capacitor-background-runner/android/src/main/libs', 'libs'
     }
 }
 ...
@@ -187,7 +187,7 @@ In `capacitor.config.json`:
 In `capacitor.config.ts`:
 
 ```ts
-/// <reference types="@tritonehealth/capacitor-background-runner" />
+/// <reference types="@tritone/capacitor-background-runner" />
 
 import { CapacitorConfig } from '@capacitor/cli';
 

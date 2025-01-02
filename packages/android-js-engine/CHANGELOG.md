@@ -17,7 +17,7 @@
   repositories {
       flatDir{
           dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
-  +		dirs '../../node_modules/@tritonehealth/capacitor-background-runner/android/src/main/libs', 'libs'
+  +		dirs '../../node_modules/@tritone/capacitor-background-runner/android/src/main/libs', 'libs'
       }
   }
   ...

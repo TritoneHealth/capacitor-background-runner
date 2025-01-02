@@ -9,7 +9,7 @@
 - Updated dependencies [36d9a61]
 - Updated dependencies [4957271]
 - Updated dependencies [3194a7d]
-  - @tritonehealth/capacitor-background-runner@2.0.0
+  - @tritone/capacitor-background-runner@2.0.0
 
 ## 1.0.6
 
@@ -21,7 +21,7 @@
 - Updated dependencies [18f72b6]
 - Updated dependencies [d6511b2]
 - Updated dependencies [b09f30e]
-  - @tritonehealth/capacitor-background-runner@1.1.0
+  - @tritone/capacitor-background-runner@1.1.0
 
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
