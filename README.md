@@ -19,7 +19,6 @@ On iOS you must enable the Background Modes capability.
 
 Once added, you must enable the `Background fetch` and `Background processing` modes at a minimum to enable the ability to register and schedule your background tasks.
 
-If you will be making use of Geolocation or Push Notifications, enable `Location updates` or `Remote notifications` respectively.
 
 ![Configure Background Modes in Xcode](https://github.com/ionic-team/capacitor-background-runner/raw/main/docs/configure_background_modes.png)
 
@@ -58,15 +57,6 @@ func application(_ application: UIApplication, didReceiveRemoteNotification user
     }
 ```
 
-### Geolocation
-
-Apple requires privacy descriptions to be specified in `Info.plist` for location information:
-
-- `NSLocationAlwaysUsageDescription` (`Privacy - Location Always Usage Description`)
-- `NSLocationWhenInUseUsageDescription` (`Privacy - Location When In Use Usage Description`)
-
-Read about [Configuring `Info.plist`](https://capacitorjs.com/docs/ios/configuration#configuring-infoplist) in the [iOS Guide](https://capacitorjs.com/docs/ios) for more information on setting iOS permissions in Xcode
-
 ## Android
 
 Insert the following line to `android/app/build.gradle`:
@@ -85,19 +75,6 @@ repositories {
 ```
 
 If you are upgrading from 1.0.5 with an existing Android project, be sure to delete the `android-js-engine-release.aar` from `android/src/main/libs`.
-
-### Geolocation
-
-This API requires the following permissions be added to your `AndroidManifest.xml`:
-
-```xml
-<!-- Geolocation API -->
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<uses-feature android:name="android.hardware.location.gps" />
-```
-
-The first two permissions ask for location data, both fine and coarse, and the last line is optional but necessary if your app _requires_ GPS to function. You may leave it out, though keep in mind that this may mean your app is installed on devices lacking GPS hardware.
 
 ### Local Notifications
 
@@ -300,12 +277,12 @@ It’s not possible to run persistent, always running background services on mob
 ### checkPermissions()
 
 ```typescript
-checkPermissions() => any
+checkPermissions() => Promise<PermissionStatus>
 ```
 
 Check permissions for the various Capacitor device APIs.
 
-**Returns:** <code>any</code>
+**Returns:** <code>Promise&lt;<a href="#permissionstatus">PermissionStatus</a>&gt;</code>
 
 **Since:** 1.0.0
 
@@ -315,7 +292,7 @@ Check permissions for the various Capacitor device APIs.
 ### requestPermissions(...)
 
 ```typescript
-requestPermissions(options: RequestPermissionOptions) => any
+requestPermissions(options: RequestPermissionOptions) => Promise<PermissionStatus>
 ```
 
 Request permission to display local notifications.
@@ -324,7 +301,7 @@ Request permission to display local notifications.
 | ------------- | ----------------------------------------------------------------------------- |
 | **`options`** | <code><a href="#requestpermissionoptions">RequestPermissionOptions</a></code> |
 
-**Returns:** <code>any</code>
+**Returns:** <code>Promise&lt;<a href="#permissionstatus">PermissionStatus</a>&gt;</code>
 
 **Since:** 1.0.0
 
@@ -334,7 +311,7 @@ Request permission to display local notifications.
 ### dispatchEvent(...)
 
 ```typescript
-dispatchEvent<T = void>(options: DispatchEventOptions) => any
+dispatchEvent<T = void>(options: DispatchEventOptions) => Promise<T>
 ```
 
 Dispatches an event to the configured runner.
@@ -343,7 +320,7 @@ Dispatches an event to the configured runner.
 | ------------- | --------------------------------------------------------------------- |
 | **`options`** | <code><a href="#dispatcheventoptions">DispatchEventOptions</a></code> |
 
-**Returns:** <code>any</code>
+**Returns:** <code>Promise&lt;T&gt;</code>
 
 **Since:** 1.0.0
 
@@ -357,15 +334,14 @@ Dispatches an event to the configured runner.
 
 | Prop                | Type                                                        |
 | ------------------- | ----------------------------------------------------------- |
-| **`geolocation`**   | <code><a href="#permissionstate">PermissionState</a></code> |
 | **`notifications`** | <code><a href="#permissionstate">PermissionState</a></code> |
 
 
 #### RequestPermissionOptions
 
-| Prop       | Type            |
-| ---------- | --------------- |
-| **`apis`** | <code>{}</code> |
+| Prop       | Type                           |
+| ---------- | ------------------------------ |
+| **`apis`** | <code>'notifications'[]</code> |
 
 
 #### DispatchEventOptions
@@ -387,7 +363,7 @@ Dispatches an event to the configured runner.
 
 #### API
 
-<code>'geolocation' | 'notifications'</code>
+<code>'notifications'</code>
 
 </docgen-api>
 
@@ -443,33 +419,84 @@ Send basic local notifications.
 
 | Prop             | Type                                                                                                | Description                        | Since |
 | ---------------- | --------------------------------------------------------------------------------------------------- | ---------------------------------- | ----- |
-| **`schedule`**   | <code>(options: {}) =&gt; void</code>                                                               | Schedule a local notification      | 1.0.0 |
+| **`schedule`**   | <code>(options: NotificationScheduleOptions[]) =&gt; void</code>                                    | Schedule a local notification      | 1.0.0 |
 | **`setBadge`**   | <code>(options: <a href="#notificationbadgeoptions">NotificationBadgeOptions</a>) =&gt; void</code> | Set the application badge count    | 2.0.0 |
 | **`clearBadge`** | <code>() =&gt; void</code>                                                                          | Clears the application badge count | 2.0.0 |
 
 
 #### NotificationScheduleOptions
 
-| Prop                   | Type                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Since |
-| ---------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
-| **`id`**               | <code>number</code>  | The notification identifier. On Android it's a 32-bit int. So the value should be between -2147483648 and 2147483647 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 1.0.0 |
-| **`title`**            | <code>string</code>  | The title of the notification.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | 1.0.0 |
-| **`body`**             | <code>string</code>  | The body of the notification, shown below the title.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | 1.0.0 |
-| **`scheduleAt`**       | <code>Date</code>    | Date to send this notification.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 1.0.0 |
-| **`sound`**            | <code>string</code>  | Name of the audio file to play when this notification is displayed. Include the file extension with the filename. On iOS, the file should be in the app bundle. On Android, the file should be in res/raw folder. Recommended format is `.wav` because is supported by both iOS and Android. Only available for iOS and Android &lt; 26. For Android 26+ use channelId of a channel configured with the desired sound. If the sound file is not found, (i.e. empty string or wrong name) the default system notification sound will be used. If not provided, it will produce the default sound on Android and no sound on iOS. | 1.0.0 |
-| **`actionTypeId`**     | <code>string</code>  | Associate an action type with this notification.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 1.0.0 |
-| **`threadIdentifier`** | <code>string</code>  | Used to group multiple notifications. Sets `threadIdentifier` on the [`UNMutableNotificationContent`](https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent). Only available for iOS.                                                                                                                                                                                                                                                                                                                                                                                                        | 1.0.0 |
-| **`summaryArgument`**  | <code>string</code>  | The string this notification adds to the category's summary format string. Sets `summaryArgument` on the [`UNMutableNotificationContent`](https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent). Only available for iOS.                                                                                                                                                                                                                                                                                                                                                                    | 1.0.0 |
-| **`group`**            | <code>string</code>  | Used to group multiple notifications. Calls `setGroup()` on [`NotificationCompat.Builder`](https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder) with the provided value. Only available for Android.                                                                                                                                                                                                                                                                                                                                                                                           | 1.0.0 |
-| **`groupSummary`**     | <code>string</code>  | If true, this notification becomes the summary for a group of notifications. Calls `setGroupSummary()` on [`NotificationCompat.Builder`](https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder) with the provided value. Only available for Android when using `group`.                                                                                                                                                                                                                                                                                                                          | 1.0.0 |
-| **`extra`**            | <code>any</code>     | Set extra data to store within this notification.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | 1.0.0 |
-| **`ongoing`**          | <code>boolean</code> | If true, the notification can't be swiped away. Calls `setOngoing()` on [`NotificationCompat.Builder`](https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder) with the provided value. Only available for Android.                                                                                                                                                                                                                                                                                                                                                                               | 1.0.0 |
-| **`autoCancel`**       | <code>boolean</code> | If true, the notification is canceled when the user clicks on it. Calls `setAutoCancel()` on [`NotificationCompat.Builder`](https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder) with the provided value. Only available for Android.                                                                                                                                                                                                                                                                                                                                                          | 1.0.0 |
-| **`largeBody`**        | <code>string</code>  | Sets a multiline text block for display in a big text notification style.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 1.0.0 |
-| **`summaryText`**      | <code>string</code>  | Used to set the summary text detail in inbox and big text notification styles. Only available for Android.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | 1.0.0 |
-| **`smallIcon`**        | <code>string</code>  | Set a custom status bar icon. If set, this overrides the `smallIcon` option from Capacitor configuration. Icons should be placed in your app's `res/drawable` folder. The value for this option should be the drawable resource ID, which is the filename without an extension. Only available for Android.                                                                                                                                                                                                                                                                                                                     | 1.0.0 |
-| **`largeIcon`**        | <code>string</code>  | Set a large icon for notifications. Icons should be placed in your app's `res/drawable` folder. The value for this option should be the drawable resource ID, which is the filename without an extension. Only available for Android.                                                                                                                                                                                                                                                                                                                                                                                           | 1.0.0 |
-| **`channelId`**        | <code>string</code>  | Specifies the channel the notification should be delivered on. If channel with the given name does not exist then the notification will not fire. If not provided, it will use the default channel. Calls `setChannelId()` on [`NotificationCompat.Builder`](https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder) with the provided value. Only available for Android 26+.                                                                                                                                                                                                                     | 1.0.0 |
+| Prop                   | Type                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Since |
+| ---------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| **`id`**               | <code>number</code>                   | The notification identifier. On Android it's a 32-bit int. So the value should be between -2147483648 and 2147483647 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 1.0.0 |
+| **`title`**            | <code>string</code>                   | The title of the notification.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | 1.0.0 |
+| **`body`**             | <code>string</code>                   | The body of the notification, shown below the title.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | 1.0.0 |
+| **`scheduleAt`**       | <code><a href="#date">Date</a></code> | <a href="#date">Date</a> to send this notification.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | 1.0.0 |
+| **`sound`**            | <code>string</code>                   | Name of the audio file to play when this notification is displayed. Include the file extension with the filename. On iOS, the file should be in the app bundle. On Android, the file should be in res/raw folder. Recommended format is `.wav` because is supported by both iOS and Android. Only available for iOS and Android &lt; 26. For Android 26+ use channelId of a channel configured with the desired sound. If the sound file is not found, (i.e. empty string or wrong name) the default system notification sound will be used. If not provided, it will produce the default sound on Android and no sound on iOS. | 1.0.0 |
+| **`actionTypeId`**     | <code>string</code>                   | Associate an action type with this notification.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 1.0.0 |
+| **`threadIdentifier`** | <code>string</code>                   | Used to group multiple notifications. Sets `threadIdentifier` on the [`UNMutableNotificationContent`](https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent). Only available for iOS.                                                                                                                                                                                                                                                                                                                                                                                                        | 1.0.0 |
+| **`summaryArgument`**  | <code>string</code>                   | The string this notification adds to the category's summary format string. Sets `summaryArgument` on the [`UNMutableNotificationContent`](https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent). Only available for iOS.                                                                                                                                                                                                                                                                                                                                                                    | 1.0.0 |
+| **`group`**            | <code>string</code>                   | Used to group multiple notifications. Calls `setGroup()` on [`NotificationCompat.Builder`](https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder) with the provided value. Only available for Android.                                                                                                                                                                                                                                                                                                                                                                                           | 1.0.0 |
+| **`groupSummary`**     | <code>string</code>                   | If true, this notification becomes the summary for a group of notifications. Calls `setGroupSummary()` on [`NotificationCompat.Builder`](https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder) with the provided value. Only available for Android when using `group`.                                                                                                                                                                                                                                                                                                                          | 1.0.0 |
+| **`extra`**            | <code>any</code>                      | Set extra data to store within this notification.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | 1.0.0 |
+| **`ongoing`**          | <code>boolean</code>                  | If true, the notification can't be swiped away. Calls `setOngoing()` on [`NotificationCompat.Builder`](https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder) with the provided value. Only available for Android.                                                                                                                                                                                                                                                                                                                                                                               | 1.0.0 |
+| **`autoCancel`**       | <code>boolean</code>                  | If true, the notification is canceled when the user clicks on it. Calls `setAutoCancel()` on [`NotificationCompat.Builder`](https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder) with the provided value. Only available for Android.                                                                                                                                                                                                                                                                                                                                                          | 1.0.0 |
+| **`largeBody`**        | <code>string</code>                   | Sets a multiline text block for display in a big text notification style.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 1.0.0 |
+| **`summaryText`**      | <code>string</code>                   | Used to set the summary text detail in inbox and big text notification styles. Only available for Android.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | 1.0.0 |
+| **`smallIcon`**        | <code>string</code>                   | Set a custom status bar icon. If set, this overrides the `smallIcon` option from Capacitor configuration. Icons should be placed in your app's `res/drawable` folder. The value for this option should be the drawable resource ID, which is the filename without an extension. Only available for Android.                                                                                                                                                                                                                                                                                                                     | 1.0.0 |
+| **`largeIcon`**        | <code>string</code>                   | Set a large icon for notifications. Icons should be placed in your app's `res/drawable` folder. The value for this option should be the drawable resource ID, which is the filename without an extension. Only available for Android.                                                                                                                                                                                                                                                                                                                                                                                           | 1.0.0 |
+| **`channelId`**        | <code>string</code>                   | Specifies the channel the notification should be delivered on. If channel with the given name does not exist then the notification will not fire. If not provided, it will use the default channel. Calls `setChannelId()` on [`NotificationCompat.Builder`](https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder) with the provided value. Only available for Android 26+.                                                                                                                                                                                                                     | 1.0.0 |
+
+
+#### Date
+
+Enables basic storage and retrieval of dates and times.
+
+| Method                 | Signature                                                                                                    | Description                                                                                                                             |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| **toString**           | () =&gt; string                                                                                              | Returns a string representation of a date. The format of the string depends on the locale.                                              |
+| **toDateString**       | () =&gt; string                                                                                              | Returns a date as a string value.                                                                                                       |
+| **toTimeString**       | () =&gt; string                                                                                              | Returns a time as a string value.                                                                                                       |
+| **toLocaleString**     | () =&gt; string                                                                                              | Returns a value as a string value appropriate to the host environment's current locale.                                                 |
+| **toLocaleDateString** | () =&gt; string                                                                                              | Returns a date as a string value appropriate to the host environment's current locale.                                                  |
+| **toLocaleTimeString** | () =&gt; string                                                                                              | Returns a time as a string value appropriate to the host environment's current locale.                                                  |
+| **valueOf**            | () =&gt; number                                                                                              | Returns the stored time value in milliseconds since midnight, January 1, 1970 UTC.                                                      |
+| **getTime**            | () =&gt; number                                                                                              | Gets the time value in milliseconds.                                                                                                    |
+| **getFullYear**        | () =&gt; number                                                                                              | Gets the year, using local time.                                                                                                        |
+| **getUTCFullYear**     | () =&gt; number                                                                                              | Gets the year using Universal Coordinated Time (UTC).                                                                                   |
+| **getMonth**           | () =&gt; number                                                                                              | Gets the month, using local time.                                                                                                       |
+| **getUTCMonth**        | () =&gt; number                                                                                              | Gets the month of a <a href="#date">Date</a> object using Universal Coordinated Time (UTC).                                             |
+| **getDate**            | () =&gt; number                                                                                              | Gets the day-of-the-month, using local time.                                                                                            |
+| **getUTCDate**         | () =&gt; number                                                                                              | Gets the day-of-the-month, using Universal Coordinated Time (UTC).                                                                      |
+| **getDay**             | () =&gt; number                                                                                              | Gets the day of the week, using local time.                                                                                             |
+| **getUTCDay**          | () =&gt; number                                                                                              | Gets the day of the week using Universal Coordinated Time (UTC).                                                                        |
+| **getHours**           | () =&gt; number                                                                                              | Gets the hours in a date, using local time.                                                                                             |
+| **getUTCHours**        | () =&gt; number                                                                                              | Gets the hours value in a <a href="#date">Date</a> object using Universal Coordinated Time (UTC).                                       |
+| **getMinutes**         | () =&gt; number                                                                                              | Gets the minutes of a <a href="#date">Date</a> object, using local time.                                                                |
+| **getUTCMinutes**      | () =&gt; number                                                                                              | Gets the minutes of a <a href="#date">Date</a> object using Universal Coordinated Time (UTC).                                           |
+| **getSeconds**         | () =&gt; number                                                                                              | Gets the seconds of a <a href="#date">Date</a> object, using local time.                                                                |
+| **getUTCSeconds**      | () =&gt; number                                                                                              | Gets the seconds of a <a href="#date">Date</a> object using Universal Coordinated Time (UTC).                                           |
+| **getMilliseconds**    | () =&gt; number                                                                                              | Gets the milliseconds of a <a href="#date">Date</a>, using local time.                                                                  |
+| **getUTCMilliseconds** | () =&gt; number                                                                                              | Gets the milliseconds of a <a href="#date">Date</a> object using Universal Coordinated Time (UTC).                                      |
+| **getTimezoneOffset**  | () =&gt; number                                                                                              | Gets the difference in minutes between the time on the local computer and Universal Coordinated Time (UTC).                             |
+| **setTime**            | (time: number) =&gt; number                                                                                  | Sets the date and time value in the <a href="#date">Date</a> object.                                                                    |
+| **setMilliseconds**    | (ms: number) =&gt; number                                                                                    | Sets the milliseconds value in the <a href="#date">Date</a> object using local time.                                                    |
+| **setUTCMilliseconds** | (ms: number) =&gt; number                                                                                    | Sets the milliseconds value in the <a href="#date">Date</a> object using Universal Coordinated Time (UTC).                              |
+| **setSeconds**         | (sec: number, ms?: number \| undefined) =&gt; number                                                         | Sets the seconds value in the <a href="#date">Date</a> object using local time.                                                         |
+| **setUTCSeconds**      | (sec: number, ms?: number \| undefined) =&gt; number                                                         | Sets the seconds value in the <a href="#date">Date</a> object using Universal Coordinated Time (UTC).                                   |
+| **setMinutes**         | (min: number, sec?: number \| undefined, ms?: number \| undefined) =&gt; number                              | Sets the minutes value in the <a href="#date">Date</a> object using local time.                                                         |
+| **setUTCMinutes**      | (min: number, sec?: number \| undefined, ms?: number \| undefined) =&gt; number                              | Sets the minutes value in the <a href="#date">Date</a> object using Universal Coordinated Time (UTC).                                   |
+| **setHours**           | (hours: number, min?: number \| undefined, sec?: number \| undefined, ms?: number \| undefined) =&gt; number | Sets the hour value in the <a href="#date">Date</a> object using local time.                                                            |
+| **setUTCHours**        | (hours: number, min?: number \| undefined, sec?: number \| undefined, ms?: number \| undefined) =&gt; number | Sets the hours value in the <a href="#date">Date</a> object using Universal Coordinated Time (UTC).                                     |
+| **setDate**            | (date: number) =&gt; number                                                                                  | Sets the numeric day-of-the-month value of the <a href="#date">Date</a> object using local time.                                        |
+| **setUTCDate**         | (date: number) =&gt; number                                                                                  | Sets the numeric day of the month in the <a href="#date">Date</a> object using Universal Coordinated Time (UTC).                        |
+| **setMonth**           | (month: number, date?: number \| undefined) =&gt; number                                                     | Sets the month value in the <a href="#date">Date</a> object using local time.                                                           |
+| **setUTCMonth**        | (month: number, date?: number \| undefined) =&gt; number                                                     | Sets the month value in the <a href="#date">Date</a> object using Universal Coordinated Time (UTC).                                     |
+| **setFullYear**        | (year: number, month?: number \| undefined, date?: number \| undefined) =&gt; number                         | Sets the year of the <a href="#date">Date</a> object using local time.                                                                  |
+| **setUTCFullYear**     | (year: number, month?: number \| undefined, date?: number \| undefined) =&gt; number                         | Sets the year value in the <a href="#date">Date</a> object using Universal Coordinated Time (UTC).                                      |
+| **toUTCString**        | () =&gt; string                                                                                              | Returns a date converted to a string using Universal Coordinated Time (UTC).                                                            |
+| **toISOString**        | () =&gt; string                                                                                              | Returns a date as a string value in ISO format.                                                                                         |
+| **toJSON**             | (key?: any) =&gt; string                                                                                     | Used by the JSON.stringify method to enable the transformation of an object's data for JavaScript Object Notation (JSON) serialization. |
 
 
 #### NotificationBadgeOptions
@@ -479,28 +506,6 @@ Send basic local notifications.
 | **`count`**                | <code>number</code> | The number to set on the application badge count.                                     | 2.0.0 |
 | **`notificationTitle`**    | <code>string</code> | The **required** title for the associated badge count notification. Only for Android. | 2.0.0 |
 | **`notificationSubtitle`** | <code>string</code> | The subtitle for the associated badge count notification. Only for Android.           | 2.0.0 |
-
-
-#### CapacitorGeolocation
-
-Get access to device location information.
-
-| Prop                     | Type                                                                                   | Description                          | Since |
-| ------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------ | ----- |
-| **`getCurrentPosition`** | <code>() =&gt; <a href="#getcurrentpositionresult">GetCurrentPositionResult</a></code> | Get the device's last known location | 1.0.0 |
-
-
-#### GetCurrentPositionResult
-
-| Prop                   | Type                        | Description                                                                                                           | Since |
-| ---------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------- | ----- |
-| **`latitude`**         | <code>number</code>         | Latitude in decimal degrees                                                                                           | 1.0.0 |
-| **`longitude`**        | <code>number</code>         | longitude in decimal degrees                                                                                          | 1.0.0 |
-| **`accuracy`**         | <code>number</code>         | Accuracy level of the latitude and longitude coordinates in meters                                                    | 1.0.0 |
-| **`altitude`**         | <code>number \| null</code> | The altitude the user is at (if available)                                                                            | 1.0.0 |
-| **`altitudeAccuracy`** | <code>number \| null</code> | Accuracy level of the altitude coordinate in meters, if available. Available on all iOS versions and on Android 8.0+. | 1.0.0 |
-| **`speed`**            | <code>number \| null</code> | The speed the user is traveling (if available)                                                                        | 1.0.0 |
-| **`heading`**          | <code>number \| null</code> | The heading the user is facing (if available)                                                                         | 1.0.0 |
 
 
 #### CapacitorWatch

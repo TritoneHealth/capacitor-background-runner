@@ -208,37 +208,6 @@ void NativeCapacitorInterface::notifications_api_clearBadge() {
   }
 }
 
-// Geolocation API
-std::string NativeCapacitorInterface::geolocation_api_getCurrentPosition() {
-  auto *env = this->java->getEnv();
-  if (env == nullptr) {
-    throw new NativeInterfaceException("JVM environment is null");
-  }
-
-  auto *geolocation = env->GetObjectField(this->api, this->java->capacitor_api_geolocation_field);
-  auto jvm_exception = get_jvm_exception(env);
-  if (jvm_exception != nullptr) {
-    throw *jvm_exception;
-  }
-
-  auto value_j_str = (jstring)env->CallObjectMethod(geolocation, this->java->capacitor_api_geolocation_getCurrentPosition_method);
-  jvm_exception = get_jvm_exception(env);
-  if (jvm_exception != nullptr) {
-    throw *jvm_exception;
-  }
-
-  if (value_j_str == nullptr) {
-    return "";
-  }
-
-  const auto *c_json_str = env->GetStringUTFChars(value_j_str, nullptr);
-
-  auto json = std::string(c_json_str);
-  env->ReleaseStringUTFChars(value_j_str, c_json_str);
-
-  return json;
-}
-
 // App API
 std::string NativeCapacitorInterface::app_api_getInfo() {
   auto *env = this->java->getEnv();

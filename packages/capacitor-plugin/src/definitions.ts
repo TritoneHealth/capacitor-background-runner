@@ -99,10 +99,9 @@ declare module '@capacitor/cli' {
   }
 }
 
-export type API = 'geolocation' | 'notifications';
+export type API = 'notifications';
 
 export interface PermissionStatus {
-  geolocation: PermissionState;
   notifications: PermissionState;
 }
 

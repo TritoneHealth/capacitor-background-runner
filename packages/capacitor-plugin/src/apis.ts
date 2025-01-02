@@ -1,50 +1,3 @@
-export interface GetCurrentPositionResult {
-  /**
-   * Latitude in decimal degrees
-   *
-   * @since 1.0.0
-   */
-  latitude: number;
-  /**
-   * longitude in decimal degrees
-   *
-   * @since 1.0.0
-   */
-  longitude: number;
-  /**
-   * Accuracy level of the latitude and longitude coordinates in meters
-   *
-   * @since 1.0.0
-   */
-  accuracy: number;
-  /**
-   * The altitude the user is at (if available)
-   *
-   * @since 1.0.0
-   */
-  altitude: number | null;
-  /**
-   * Accuracy level of the altitude coordinate in meters, if available.
-   *
-   * Available on all iOS versions and on Android 8.0+.
-   *
-   * @since 1.0.0
-   */
-  altitudeAccuracy?: number | null | undefined;
-  /**
-   * The speed the user is traveling (if available)
-   *
-   * @since 1.0.0
-   */
-  speed: number | null;
-  /**
-   * The heading the user is facing (if available)
-   *
-   * @since 1.0.0
-   */
-  heading: number | null;
-}
-
 export interface BatteryStatus {
   batteryLevel: number;
   isCharging: boolean;
@@ -314,19 +267,6 @@ export interface AppState {
 }
 
 /**
- * Get access to device location information.
- *
- * @since 1.0.0
- */
-export interface CapacitorGeolocation {
-  /**
-   * Get the device's last known location
-   * @since 1.0.0
-   */
-  getCurrentPosition: () => GetCurrentPositionResult;
-}
-
-/**
  * A simple string key / value store backed by UserDefaults on iOS and Shared Preferences on Android.
  */
 export interface CapacitorKV {
@@ -454,7 +394,6 @@ export interface CapacitorAPI {
   CapacitorDevice: CapacitorDevice;
   CapacitorKV: CapacitorKV;
   CapacitorNotifications: CapacitorNotifications;
-  CapacitorGeolocation: CapacitorGeolocation;
   CapacitorWatch: CapacitorWatch;
   CapacitorApp: CapacitorApp;
 }

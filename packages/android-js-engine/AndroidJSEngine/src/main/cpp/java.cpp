@@ -88,13 +88,6 @@ Java::Java(JNIEnv *env) {
   env->DeleteLocalRef(tmp_class);
   tmp_class = nullptr;
 
-  tmp_class = env->FindClass("io/ionic/android_js_engine/capacitor_api/GeolocationAPI");
-  this->check_exception(env);
-
-  this->capacitor_geolocation_api_class = (jclass)env->NewGlobalRef(tmp_class);
-  env->DeleteLocalRef(tmp_class);
-  tmp_class = nullptr;
-
   tmp_class = env->FindClass("io/ionic/android_js_engine/capacitor_api/NotificationsAPI");
   this->check_exception(env);
 
@@ -113,9 +106,6 @@ Java::Java(JNIEnv *env) {
   this->check_exception(env);
 
   this->capacitor_api_device_field = env->GetFieldID(this->capacitor_api_class, "device", "Lio/ionic/android_js_engine/capacitor_api/DeviceAPI;");
-  this->check_exception(env);
-
-  this->capacitor_api_geolocation_field = env->GetFieldID(this->capacitor_api_class, "geolocation", "Lio/ionic/android_js_engine/capacitor_api/GeolocationAPI;");
   this->check_exception(env);
 
   this->capacitor_api_notification_field = env->GetFieldID(this->capacitor_api_class, "notifications", "Lio/ionic/android_js_engine/capacitor_api/NotificationsAPI;");
@@ -137,9 +127,6 @@ Java::Java(JNIEnv *env) {
   this->check_exception(env);
 
   this->capacitor_api_device_getNetworkStatus_method = env->GetMethodID(this->capacitor_device_api_class, "getNetworkStatus", "()Ljava/lang/String;");
-  this->check_exception(env);
-
-  this->capacitor_api_geolocation_getCurrentPosition_method = env->GetMethodID(this->capacitor_geolocation_api_class, "getCurrentPosition", "()Ljava/lang/String;");
   this->check_exception(env);
 
   this->capacitor_api_notifications_schedule_method = env->GetMethodID(this->capacitor_notification_api_class, "schedule", "(Ljava/lang/String;)V");

@@ -52,7 +52,6 @@ class Context {
 
   void init_capacitor_api();
   void init_capacitor_device_api() const;
-  void init_capacitor_geolocation_api() const;
   void init_capacitor_kv_api() const;
   void init_capacitor_notifications_api() const;
   void init_capacitor_app_api() const;
