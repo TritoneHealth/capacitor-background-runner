@@ -1,6 +1,6 @@
 {
   "name": "@tritonehealth/capacitor-background-runner",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "private": false,
   "description": "Capacitor Background Runner",
   "main": "dist/plugin.cjs.js",
