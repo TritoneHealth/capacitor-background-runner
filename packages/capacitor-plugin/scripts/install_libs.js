@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const msgPrefix = '[@tritone/capacitor-background-runner]';
+const msgPrefix = '[@tritonehealth/capacitor-background-runner]';
 
 let workingDir = process.env.INIT_CWD;
 if (!workingDir) {
@@ -25,7 +25,7 @@ if (!fs.existsSync(androidGradlePath)) {
 const searchText =
   "dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'";
 const insertText =
-  "\n\t\tdirs '../../node_modules/@tritone/capacitor-background-runner/android/src/main/libs', 'libs'";
+  "\n\t\tdirs '../../node_modules/@tritonehealth/capacitor-background-runner/android/src/main/libs', 'libs'";
 
 let gradleFile = fs.readFileSync(androidGradlePath).toString('utf-8');
 if (gradleFile.indexOf(insertText) != -1) {

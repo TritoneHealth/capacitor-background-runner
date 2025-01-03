@@ -1,5 +1,5 @@
 {
-  "name": "@tritone/capacitor-background-runner",
+  "name": "@tritonehealth/capacitor-background-runner",
   "version": "2.0.0",
   "private": false,
   "description": "Capacitor Background Runner",
@@ -42,8 +42,8 @@
     "docgen": "docgen --api BackgroundRunnerPlugin --output-readme README.md --output-json dist/docs.json",
     "docgen-api": "docgen --api CapacitorAPI --output-readme API.md --output-json dist/docs-api.json && node ./scripts/combine_docs.js",
     "build-sdk": "./scripts/build-native-sdks.sh",
-    "build": "npm run clean && npm run docgen && npm run docgen-api && tsc && rollup -c rollup.config.js && npm run build-sdk && ./scripts/copy-native-sdks.sh && npm pack && mv ./tritone-capacitor-background-runner-*.tgz ../../ && ./scripts/copy-readme.sh",
-    "pack": "npm run build && ./scripts/copy-native-sdks.sh && npm pack && mv ./tritone-capacitor-background-runner-*.tgz ../../",
+    "build": "npm run clean && npm run docgen && npm run docgen-api && tsc && rollup -c rollup.config.js && npm run build-sdk && ./scripts/copy-native-sdks.sh && npm pack && mv ./tritonehealth-capacitor-background-runner-*.tgz ../../ && ./scripts/copy-readme.sh",
+    "pack": "npm run build && ./scripts/copy-native-sdks.sh && npm pack && mv ./tritonehealth-capacitor-background-runner-*.tgz ../../",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build",
@@ -82,5 +82,5 @@
       "src": "android"
     }
   },
-  "gitHead": "416819f313faa892b109459a6798100439826552"
+  "gitHead": "476efd5afb3e6fc1951f9eafc31cd5fca4516321"
 }

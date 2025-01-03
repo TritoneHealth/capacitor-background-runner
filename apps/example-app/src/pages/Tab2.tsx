@@ -8,7 +8,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { BackgroundRunner } from "@tritone/capacitor-background-runner";
+import { BackgroundRunner } from "@tritonehealth/capacitor-background-runner";
 import "./Tab2.css";
 
 const Tab2: React.FC = () => {

@@ -32,7 +32,7 @@
   repositories {
       flatDir{
           dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
-  +		dirs '../../node_modules/@tritone/capacitor-background-runner/android/src/main/libs', 'libs'
+  +		dirs '../../node_modules/@tritonehealth/capacitor-background-runner/android/src/main/libs', 'libs'
       }
   }
   ...
@@ -57,15 +57,15 @@
 
 ## [1.0.4](https://github.com/ionic-team/capacitor-background-runner/compare/1.0.3...1.0.4) (2023-08-10)
 
-**Note:** Version bump only for package @tritone/capacitor-background-runner
+**Note:** Version bump only for package @tritonehealth/capacitor-background-runner
 
 ## [1.0.3](https://github.com/ionic-team/capacitor-background-runner/compare/1.0.2...1.0.3) (2023-08-10)
 
-**Note:** Version bump only for package @tritone/capacitor-background-runner
+**Note:** Version bump only for package @tritonehealth/capacitor-background-runner
 
 ## [1.0.2](https://github.com/ionic-team/capacitor-background-runner/compare/1.0.1...1.0.2) (2023-08-10)
 
-**Note:** Version bump only for package @tritone/capacitor-background-runner
+**Note:** Version bump only for package @tritonehealth/capacitor-background-runner
 
 ## [1.0.1](https://github.com/ionic-team/capacitor-background-runner/compare/1.0.0...1.0.1) (2023-08-09)
 

@@ -1,4 +1,4 @@
-/// <reference types="@tritone/capacitor-background-runner" />
+/// <reference types="@tritonehealth/capacitor-background-runner" />
 
 import { CapacitorConfig } from "@capacitor/cli";
 
