@@ -4,7 +4,7 @@ export default {
     {
       file: 'dist/plugin.js',
       format: 'iife',
-      name: 'capacitorBackgroundRunner',
+      name: 'tritonehealthCapacitorBackgroundRunner',
       globals: {
         '@capacitor/core': 'capacitorExports',
       },

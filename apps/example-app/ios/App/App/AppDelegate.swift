@@ -1,7 +1,7 @@
 import UIKit
 import BackgroundTasks
 import Capacitor
-import CapacitorBackgroundRunner
+import TritonehealthCapacitorBackgroundRunner
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

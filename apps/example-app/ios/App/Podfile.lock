@@ -3,7 +3,7 @@ PODS:
     - CapacitorCordova
   - CapacitorApp (6.0.0):
     - Capacitor
-  - CapacitorBackgroundRunner (1.1.0):
+  - TritonehealthCapacitorBackgroundRunner (1.1.0):
     - Capacitor
   - CapacitorCordova (6.0.0)
   - CapacitorHaptics (6.0.0):
@@ -16,7 +16,7 @@ PODS:
 DEPENDENCIES:
   - "Capacitor (from `../../../../node_modules/.pnpm/@capacitor+ios@6.0.0_@capacitor+core@6.0.0/node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../../../node_modules/.pnpm/@capacitor+app@6.0.0_@capacitor+core@6.0.0/node_modules/@capacitor/app`)"
-  - CapacitorBackgroundRunner (from `../../../../packages/capacitor-plugin`)
+  - TritonehealthCapacitorBackgroundRunner (from `../../../../packages/capacitor-plugin`)
   - "CapacitorCordova (from `../../../../node_modules/.pnpm/@capacitor+ios@6.0.0_@capacitor+core@6.0.0/node_modules/@capacitor/ios`)"
   - "CapacitorHaptics (from `../../../../node_modules/.pnpm/@capacitor+haptics@6.0.0_@capacitor+core@6.0.0/node_modules/@capacitor/haptics`)"
   - "CapacitorKeyboard (from `../../../../node_modules/.pnpm/@capacitor+keyboard@6.0.0_@capacitor+core@6.0.0/node_modules/@capacitor/keyboard`)"
@@ -27,7 +27,7 @@ EXTERNAL SOURCES:
     :path: "../../../../node_modules/.pnpm/@capacitor+ios@6.0.0_@capacitor+core@6.0.0/node_modules/@capacitor/ios"
   CapacitorApp:
     :path: "../../../../node_modules/.pnpm/@capacitor+app@6.0.0_@capacitor+core@6.0.0/node_modules/@capacitor/app"
-  CapacitorBackgroundRunner:
+  TritonehealthCapacitorBackgroundRunner:
     :path: "../../../../packages/capacitor-plugin"
   CapacitorCordova:
     :path: "../../../../node_modules/.pnpm/@capacitor+ios@6.0.0_@capacitor+core@6.0.0/node_modules/@capacitor/ios"
@@ -41,7 +41,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Capacitor: 559d073c4ca6c27f8e7002c807eea94c3ba435a9
   CapacitorApp: 9d53aec7101f7b030a950c5bdc4df8612576b279
-  CapacitorBackgroundRunner: 270b88dd7ba6631b22f17ab4f10422834d82c1aa
+  TritonehealthCapacitorBackgroundRunner: 270b88dd7ba6631b22f17ab4f10422834d82c1aa
   CapacitorCordova: 8c4bfdf69368512e85b1d8b724dd7546abeb30af
   CapacitorHaptics: 9ebc9363f0e9b8eb4295088a0b474530acf1859b
   CapacitorKeyboard: deacbd09d8d1029c3681197fb05d206b721d5f73

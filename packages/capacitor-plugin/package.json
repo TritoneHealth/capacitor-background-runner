@@ -14,7 +14,7 @@
     "dist/",
     "ios/Plugin/",
     "scripts/install_libs.js",
-    "CapacitorBackgroundRunner.podspec"
+    "TritonehealthCapacitorBackgroundRunner.podspec"
   ],
   "author": "Ionic Team",
   "repository": {

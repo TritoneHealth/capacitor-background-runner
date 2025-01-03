@@ -26,7 +26,7 @@ After enabling the Background Modes capability, add the following to your app's 
 
 At the top of the file, under `import Capacitor` add:
 ```swift
-import CapacitorBackgroundRunner
+import TritonehealthCapacitorBackgroundRunner
 ```
 
 ```swift
