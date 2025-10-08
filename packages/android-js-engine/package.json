@@ -18,5 +18,5 @@
     "run-clang-format": "pnpm clang-format --glob=AndroidJSEngine/src/main/cpp/**/*.{cpp,h}"
   },
   "version": "1.1.0",
-  "gitHead": "476efd5afb3e6fc1951f9eafc31cd5fca4516321"
+  "gitHead": "ce15dd40a424f863a755e6b98c9ad048446fd958"
 }

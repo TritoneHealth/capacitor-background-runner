@@ -1,6 +1,6 @@
 {
   "name": "@tritonehealth/capacitor-background-runner",
-  "version": "3.0.0",
+  "version": "4.0.2",
   "private": false,
   "description": "Capacitor Background Runner",
   "main": "dist/plugin.cjs.js",
@@ -82,5 +82,5 @@
       "src": "android"
     }
   },
-  "gitHead": "476efd5afb3e6fc1951f9eafc31cd5fca4516321"
+  "gitHead": "ce15dd40a424f863a755e6b98c9ad048446fd958"
 }
